@@ -166,7 +166,7 @@ class SawyerEnv:
 
     def _render_raw(self, mode):
         """Returns rendering as uint8 in range [0...255]"""
-        return self._env.render(mode=mode)
+        return self._env.sim.render(64, 64, mode='offscreen', camera_name='corner')[:,:,::-1]
 
     def _default_hparams(self):
         default_dict = ParamDict({
