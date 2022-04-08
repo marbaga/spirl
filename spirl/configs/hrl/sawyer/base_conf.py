@@ -11,7 +11,7 @@ from spirl.rl.components.replay_buffer import UniformReplayBuffer
 from spirl.rl.agents.ac_agent import SACAgent
 from spirl.rl.agents.skill_space_agent import SkillSpaceAgent
 from spirl.models.skill_prior_mdl import SkillPriorMdl
-from spirl.configs.default_data_configs.kitchen import data_spec
+from spirl.configs.default_data_configs.sawyer import data_spec
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -119,5 +119,6 @@ data_config.dataset_spec = data_spec
 # Environment
 env_config = AttrDict(
     reward_norm=1.,
+    env_name='reach-v2'
 )
 

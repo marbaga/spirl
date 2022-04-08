@@ -30,9 +30,8 @@ class SawyerEnv:
 
     def __init__(self, config):
         self._hp = self._default_hparams().overwrite(config)
-        self._env = self._make_env(self._hp.name)
         self._mj_except = MujocoException
-        env_cls = ALL_V2_ENVIRONMENTS_GOAL_OBSERVABLE[self._hp.name + '-goal-observable']
+        env_cls = ALL_V2_ENVIRONMENTS_GOAL_OBSERVABLE[self._hp.env_name + '-goal-observable']
         env = env_cls(seed=0)
         fix_seed = False
         if fix_seed:
@@ -44,7 +43,7 @@ class SawyerEnv:
         env.reset()
         env.reset_model()  # Might not be necessary
         self._env = env
-        self._env_name = self._hp.name
+        self._env_name = self._hp.env_name
         self._short_name = 'sawyer'
         self.terminate_on_success = False
         self.goal_cond = True
@@ -174,7 +173,7 @@ class SawyerEnv:
             'device': None,         # device that all tensors should get transferred to
             'screen_width': 64,     # width of rendered images
             'screen_height': 64,    # height of rendered images
-            'name': self._name,   # name of openai/gym environment
+            'env_name': None,   # name of openai/gym environment
             'reward_norm': 1.,  # reward normalization factor
             'punish_reward': -100,   # reward used when action leads to simulation crash
             'unwrap_time': True,    # removes time limit wrapper from envs so that done is not set on timeout
